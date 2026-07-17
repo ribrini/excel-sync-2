@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>教学计划在线查看</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 顶部状态栏 -->
+    <header id="header">
+        <div class="header-left">
+            <h1>教学计划在线</h1>
+            <span id="sync-status" class="status-badge status-loading">加载中...</span>
+        </div>
+        <div class="header-right">
+            <span id="last-update">—</span>
+            <span id="editor-name" class="editor-badge" title="点击修改你的名字">教师</span>
+        </div>
+    </header>
+
+    <!-- 标签栏 -->
+    <nav id="tabs"></nav>
+
+    <!-- 内容区域 -->
+    <main id="content">
+        <div id="loading-screen">
+            <div class="spinner"></div>
+            <p>正在加载数据...</p>
+        </div>
+    </main>
+
+    <!-- 底部操作栏 -->
+    <footer id="footer" style="display:none;">
+        <button id="btn-save" class="btn btn-primary">保存修改</button>
+        <span id="save-status"></span>
+        <span class="footer-hint">网页为在线共享视图，最终数据以本地 Excel 为准</span>
+    </footer>
+
+    <!-- 编辑者名称弹窗 -->
+    <div id="name-modal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <h3>请输入你的名字</h3>
+            <input type="text" id="name-input" placeholder="如：王老师" maxlength="20">
+            <div class="modal-buttons">
+                <button id="name-cancel" class="btn btn-secondary">取消</button>
+                <button id="name-confirm" class="btn btn-primary">确定</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
