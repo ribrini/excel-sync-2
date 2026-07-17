@@ -1,0 +1,479 @@
+/* ============================================================
+   style.css - 教学计划在线查看 网页样式
+   ============================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", sans-serif;
+    background: #f5f6fa;
+    color: #2d3436;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ===== 顶部状态栏 ===== */
+#header {
+    background: #fff;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.header-left h1 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a1a2e;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-size: 13px;
+    color: #666;
+}
+
+#last-update {
+    color: #999;
+}
+
+.editor-badge {
+    background: #e3f2fd;
+    color: #1565c0;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    border: 1px solid #bbdefb;
+    transition: all 0.2s;
+}
+
+.editor-badge:hover {
+    background: #bbdefb;
+}
+
+/* ===== 状态标签 ===== */
+.status-badge {
+    padding: 3px 10px;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-loading {
+    background: #fff3e0;
+    color: #e65100;
+}
+
+.status-synced {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.status-updating {
+    background: #e3f2fd;
+    color: #1565c0;
+}
+
+.status-error {
+    background: #ffebee;
+    color: #c62828;
+}
+
+/* ===== 标签栏 ===== */
+#tabs {
+    display: flex;
+    gap: 4px;
+    padding: 0 24px;
+    background: #fff;
+    border-bottom: 1px solid #e0e0e0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+}
+
+.tab {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #666;
+    cursor: pointer;
+    border: none;
+    background: none;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+    position: relative;
+}
+
+.tab:hover {
+    color: #333;
+    background: #f5f6fa;
+}
+
+.tab.active {
+    color: #1565c0;
+    border-bottom-color: #1565c0;
+    font-weight: 600;
+}
+
+.tab .editable-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    background: #4caf50;
+    border-radius: 50%;
+    margin-left: 6px;
+    vertical-align: middle;
+}
+
+/* ===== 内容区域 ===== */
+#content {
+    flex: 1;
+    padding: 24px;
+    overflow: auto;
+}
+
+#loading-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px;
+    color: #999;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid #e0e0e0;
+    border-top-color: #1565c0;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    margin-bottom: 16px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ===== 表格 ===== */
+.sheet-container {
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+}
+
+.sheet-title {
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a1a2e;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sheet-title .badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 8px;
+    font-weight: 400;
+}
+
+.badge-readonly {
+    background: #f5f5f5;
+    color: #999;
+}
+
+.badge-editable {
+    background: #e8f5e9;
+    color: #2e7d32;
+}
+
+.table-wrap {
+    overflow-x: auto;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 14px;
+}
+
+th, td {
+    border: 1px solid #e8e8e8;
+    padding: 8px 12px;
+    text-align: center;
+    white-space: nowrap;
+}
+
+th {
+    background: #f5f6fa;
+    font-weight: 600;
+    color: #555;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+tr:nth-child(even) td {
+    background: #fafafa;
+}
+
+tr:hover td {
+    background: #f0f7ff;
+}
+
+/* 可编辑单元格 */
+td input {
+    width: 100%;
+    min-width: 60px;
+    border: 1px solid transparent;
+    background: transparent;
+    padding: 4px 6px;
+    font-size: 14px;
+    font-family: inherit;
+    text-align: center;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+td input:hover {
+    border-color: #ccc;
+    background: #fffde7;
+}
+
+td input:focus {
+    border-color: #1565c0;
+    background: #fff;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(21, 101, 192, 0.15);
+}
+
+/* 有修改未保存的单元格 */
+td input.dirty {
+    background: #fff9c4;
+    border-color: #fbc02d;
+}
+
+/* 空单元格 */
+td.empty {
+    color: #ccc;
+}
+
+/* ===== 底部操作栏 ===== */
+#footer {
+    background: #fff;
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 -1px 4px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    bottom: 0;
+    z-index: 100;
+}
+
+.btn {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 6px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: inherit;
+}
+
+.btn-primary {
+    background: #1565c0;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #0d47a1;
+}
+
+.btn-primary:disabled {
+    background: #bbb;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background: #e0e0e0;
+    color: #555;
+}
+
+.btn-secondary:hover {
+    background: #bdbdbd;
+}
+
+#save-status {
+    font-size: 13px;
+    color: #666;
+}
+
+.save-success {
+    color: #2e7d32 !important;
+}
+
+.save-error {
+    color: #c62828 !important;
+}
+
+.footer-hint {
+    margin-left: auto;
+    font-size: 12px;
+    color: #aaa;
+}
+
+/* ===== 弹窗 ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 24px;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 320px;
+}
+
+.modal-content h3 {
+    margin-bottom: 16px;
+    font-size: 16px;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    margin-bottom: 16px;
+}
+
+.modal-content input:focus {
+    border-color: #1565c0;
+    outline: none;
+}
+
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+/* ===== Toast 通知 ===== */
+.toast {
+    position: fixed;
+    bottom: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #fff;
+    z-index: 999;
+    animation: toast-in 0.3s ease;
+}
+
+.toast-success {
+    background: #2e7d32;
+}
+
+.toast-error {
+    background: #c62828;
+}
+
+.toast-info {
+    background: #1565c0;
+}
+
+@keyframes toast-in {
+    from { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+/* ===== 空状态 ===== */
+.empty-state {
+    text-align: center;
+    padding: 60px 24px;
+    color: #999;
+}
+
+.empty-state p {
+    margin-top: 8px;
+    font-size: 14px;
+}
+
+/* ===== 响应式 ===== */
+@media (max-width: 768px) {
+    #header {
+        flex-direction: column;
+        gap: 8px;
+        padding: 10px 16px;
+    }
+
+    .header-left h1 {
+        font-size: 16px;
+    }
+
+    #tabs {
+        padding: 0 8px;
+    }
+
+    .tab {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    #content {
+        padding: 12px;
+    }
+
+    th, td {
+        padding: 6px 8px;
+        font-size: 13px;
+    }
+
+    #footer {
+        padding: 8px 12px;
+        flex-wrap: wrap;
+    }
+
+    .footer-hint {
+        width: 100%;
+        text-align: center;
+        margin-top: 4px;
+    }
+}
